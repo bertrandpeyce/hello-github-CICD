@@ -3,7 +3,7 @@
 hello-github-CICD is a simple FastAPI service that encodes and decodes hexadecimal strings. It provides endpoints to encode a string to hexadecimal and decode a hexadecimal string back to its original form.
 It is designed to be used as a demonstration of continuous integration and continuous deployment (CICD) practices with GitHub.
 
-# Environment and dependencies
+## Environment and dependencies
 
 Required dependencies:
 
@@ -15,9 +15,9 @@ Optional dependencies:
 - uvicorn
 - pytest
 
-# Setup
+## Setup
 
-## Python venv
+### Python venv
 
 1. Clone the repository:
 
@@ -61,7 +61,7 @@ curl http://localhost:8000/decode/746f746f
 # expected output: "toto"
 ```
 
-## Docker
+### Docker
 
 1. Clone the repository:
 
