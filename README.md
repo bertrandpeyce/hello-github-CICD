@@ -26,29 +26,36 @@ git clone git@github.com:bertrandpeyce/hello-github-CICD.git
 cd hello-github-CICD
 ```
 
-2. Create a virtual environment:
+2. Create a virtual environment and install the package:
 
 ```bash
 python3 -m venv ~/.venv/hexencoder/
-```
-
-3. Install the package and its dependencies:
-
-```bash
 source .venv/bin/activate
 pip install .
 ```
 
-4. Run the tests to ensure everything is working correctly:
+or use Makefile
+
+```bash
+make build-venv
+```
+
+3. Run the tests to ensure everything is working correctly:
 
 ```bash
 pytest
 ```
 
-5. Run the service:
+4. Run the service:
 
 ```bash
 uvicorn hexencoder.main:app --reload --port 8000 --host 0.0.0.0
+```
+
+or use Makefile
+
+```bash
+make venv
 ```
 
 6. Test the service
@@ -91,3 +98,5 @@ curl http://localhost:8000/encode/toto
 curl http://localhost:8000/decode/746f746f
 # expected output: "toto"
 ```
+
+You can also use Makefile target to build and run the docker, see `Makefile`
