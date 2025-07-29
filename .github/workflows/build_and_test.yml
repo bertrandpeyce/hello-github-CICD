@@ -12,7 +12,7 @@ jobs:
     name: "Install package with venv"
     runs-on: ubuntu-latest
     env:
-      VENV_PATH: $HOME/.venv/hexencoder
+      VENV_PATH: ${{ github.workspace }}/.venv/hexencoder
       APP_PORT: 8000
     steps:
       - uses: actions/checkout@v4
