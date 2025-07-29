@@ -100,3 +100,25 @@ curl http://localhost:8000/decode/746f746f
 ```
 
 You can also use Makefile target to build and run the docker, see `Makefile`
+
+### Github Container Registry
+
+You can use the latest main image from the GitHub Container Registry:
+
+```bash
+docker pull ghcr.io/bertrandpeyce/hexencoder
+```
+
+You might have to log in first using a personal access token with `read:packages` scope:
+
+```bash
+echo $PAT | docker login ghcr.io -u bertrandpeyce --password-stding #PAT is an env variable containing your personal access token
+```
+
+Then run the container as described above.
+
+## Continuous Integration and Deployment
+
+If you want to push on `main` or pass a pull request on main you will need to pass github actions checks.
+Those checks includes: building the python package, building the docker image, doing some python unit test et doing API tests.
+Once a commit is pushed on `main` or a pull request is merged, the docker image is automatically built and pushed to the GitHub Container Registry.
