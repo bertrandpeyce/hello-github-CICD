@@ -15,6 +15,7 @@ jobs:
       VENV_PATH: $HOME/.venv/hexencoder
       APP_PORT: 8000
     steps:
+      - uses: actions/checkout@v4
       - name: Build package
         run: make build-venv
       - name: Unit tests
@@ -35,6 +36,7 @@ jobs:
       NAME: hexencoder
       APP_PORT: 8000
     steps:
+      - uses: actions/checkout@v4
       - name: Build Docker
         run: make build-docker
       - name: "Run container in detached mode"
