@@ -13,4 +13,4 @@ def hex_encode_text(text: str):
 
 @app.get("/decode/{text}")
 def hex_decode_text(text: str):
-    return codecs.getdecoder("hex")(text.encode())[0].decode("utf - 8")
+    return codecs.getdecoder("hex")(text.encode())[0].decode("ascii")
