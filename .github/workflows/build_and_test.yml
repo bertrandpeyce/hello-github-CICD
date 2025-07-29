@@ -22,8 +22,8 @@ jobs:
         run: make test
       - name: Run service and test API
         run: |
-          . $(VENV_PATH)/bin/activate
-          uvicorn hexencoder.main:app --reload --port $(APP_PORT) --host 0.0.0.0 &
+          . $VENV_PATH/bin/activate
+          uvicorn hexencoder.main:app --reload --port $APP_PORT --host 0.0.0.0 &
           pip install wait-for-it
           wait-for-it 127.0.0.1:$APP_PORT -t 15
           sh tests/curl_api.sh $APP_PORT
