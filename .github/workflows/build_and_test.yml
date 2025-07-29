@@ -25,7 +25,7 @@ jobs:
           . $VENV_PATH/bin/activate
           uvicorn hexencoder.main:app --reload --port $APP_PORT --host 0.0.0.0 &
           pip install wait-for-it
-          wait-for-it --service 127.0.0.1:$APP_PORT -t 15 --echo "hexencoder is up"
+          wait-for-it --service 127.0.0.1:$APP_PORT -t 15 
           sh tests/curl_api.sh $APP_PORT
       - name: Clean UP
         run: make venv-clean
@@ -44,7 +44,7 @@ jobs:
       - name: "Wait docker"
         run: |
           pip install wait-for-it
-          wait-for-it --service 127.0.0.1:$APP_PORT -t 15 --echo "hexencoder is up"
+          wait-for-it --service 127.0.0.1:$APP_PORT -t 15
       - name: "Test API"
         run: sh tests/curl_api.sh $APP_PORT
       - name: "Clean up"
