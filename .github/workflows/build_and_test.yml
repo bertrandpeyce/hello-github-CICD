@@ -1,0 +1,49 @@
+name: build and test
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  venv:
+    name: "Install package with venv"
+    runs-on: ubuntu-latest
+    env:
+      VENV_PATH: $HOME/.venv/hexencoder
+      APP_PORT: 8000
+    steps:
+      - name: Build package
+        run: make build-venv
+      - name: Unit tests
+        run: make test
+      - name: Run service and test API
+        run: |
+          . $(VENV_PATH)/bin/activate
+          uvicorn hexencoder.main:app --reload --port $(APP_PORT) --host 0.0.0.0 &
+          pip install wait-for-it
+          wait-for-it 127.0.0.1:$APP_PORT -t 15
+          sh tests/curl_api.sh $APP_PORT
+      - name: Clean UP
+        run: make venv-clean
+  docker:
+    name: "Install package with docker"
+    runs-on: ubuntu-latest
+    env:
+      NAME: hexencoder
+      APP_PORT: 8000
+    steps:
+      - name: Build Docker
+        run: make build-docker
+      - name: "Run container in detached mode"
+        run: make docker-run
+      - name: "Wait docker"
+        run: |
+          pip install wait-for-it
+          wait-for-it 127.0.0.1:$APP_PORT -t 15
+      - name: "Test API"
+        run: sh tests/curl_api.sh $APP_PORT
+      - name: "Clean up"
+        run: make docker-clean
